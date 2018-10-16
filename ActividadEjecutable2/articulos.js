@@ -1,7 +1,7 @@
 /**
  * Ejercicio: Articulos
  * Dar de alta articulo
- * Dar de baja articulo                            
+ * Dar de baja articulo
  * Buscar un articulo y mostrarlo por pantalla
  */
 
@@ -30,13 +30,13 @@ class ArtRevis {
         this.tituRevis = tituRevis;
         this.editorial = editorial;
         this.revis = false;
-     
+
     }
- 
+
     getTitulo(){
         return this.titulo;
     }
- 
+
  }
 
 class ArtConf {
@@ -51,13 +51,13 @@ class ArtConf {
         this.nombre = nombre;
         this.lugar = lugar;
         this.conf = false;
-     
+
     }
- 
+
     getTitulo(){
         return this.titulo;
     }
- 
+
  }
 
  class Patente {
@@ -70,12 +70,12 @@ class ArtConf {
         this.patente = false;
 
     }
- 
+
     getTitulo(){
         return this.titulo;
     }
- 
- } 
+
+ }
 
 let listaPubli = [];
 let atras = false;
@@ -86,9 +86,11 @@ while(!atras){
    console.log('2) Dar de baja un articulo');
    console.log('3) Modificar una publicacion');
    console.log('4) Busqueda de publicaciones');
+   console.log('5) Numero de publicaciones por autor y año');
+   console.log('6) Factor de impacto por autor y año');
    console.log('8) Salir del sistema');
    let opcion=readline.questionInt('Por favor, seleccione una de estas opciones: ');
-   
+
    if(opcion===0){
     //Dar de alta un Autor
      let nombre=readline.question('Por favor, introduce el nombre del autor: ');
@@ -98,6 +100,7 @@ while(!atras){
                 listaPubli.push(newAutor);
                 console.log(listaPubli);
    }
+
    if(opcion===1){
        //Seleccionar el tipo de Articulo
        let atras = false;
@@ -129,12 +132,12 @@ while(!atras){
                 let libConf=readline.question('Por favor, introduce el libro de la conferencia: ');
                 let nombre=readline.question('Por favor, introduce el nombre de la conferencia: ');
                 let lugar=readline.question('Por favor, introduce el lugar de la conferencia: ');
-                let newArtConf = new ArtConf(titulo,autor,n_pag,anyoPub,numMen,libConf,nombre,lugar);                 
+                let newArtConf = new ArtConf(titulo,autor,n_pag,anyoPub,numMen,libConf,nombre,lugar);
                 listaPubli.push(newArtConf);
                 console.log(listaPubli);
             }else if(opcion===3){
                 //Dar de alta una patente
-                let titulo=readline.question('Por favor, introduce una titulo: '); 
+                let titulo=readline.question('Por favor, introduce una titulo: ');
                 let autores=readline.question('Por favor, introduce los autores: ');
                 let anyoPub=readline.question('Por favor, introduce el anyo de publicación: ');
                 let anyoBen=readline.question('Por favor, introduce el anyo de bencimiento: ');
@@ -145,8 +148,9 @@ while(!atras){
                 atras=true;
             }
           }
-        
+
         }
+
        if(opcion===2){
           //Dar de baja articulos
           let atras = false;
@@ -174,7 +178,7 @@ while(!atras){
                     } else {
                         console.log('Publicacion no encontrado en el sistema');
                     }
-                
+
                  }else if(opcion===2){
                      //Dar de baja un Articulo de Revista
                     let titulo = readline.question('Por favor introduce una matricula: ');
@@ -216,6 +220,7 @@ while(!atras){
                 }
             }
         }
+
     if(opcion===3){
        //Modificar publicaciones
        let atras = false;
@@ -255,32 +260,54 @@ while(!atras){
                     let editorial = readline.question('Introduce el titulo: ');
                     if (editorial === '')publications[i].setTitle(editorial);
                 }
-           
+
             }
     }
 }
 
         if(opcion===4){
             //Busqueda de las diferentes publicaciones
-            let autor = readline.question('Introduce el autor o pulsa enter para seguir: ');
+            let nombre = readline.question('Introduce el autor o pulsa enter para seguir: ');
             let anyoPub = readline.question('Introduce el anyo de publicación o 0: ');
             let tipo = readline.question('Introduce el tipo de publicacion o pulsa enter para seguir: ');
             let busqueda = [];
             let encontrado = false;
 
-            for (public of publications) { 
-                if (autor!='') {
-                    for (autor of publications.getNombre()){
-                        if (autor === autor) {
+            for (public of publications) {
+                if (nombre!='') {
+                    for (nombre of publications.getNombre()){
+                        if (nombre === nombre) {
                             encontrado = true;
                         }
                     }
                 }
+                if (anyoPub !== 0 && publicacion.getAnyoPub()) encontrado = true;
+                if (tipo !== 0 && publicacion.ArtRevis || publicacion.ArtConf || publicacion.Patente) encontrado = true;
+                if (encontrado === true) busqueda.push(publicacion);
             }
+            console.log(busqueda);
+
+        } else if (opcion === 5) {
+            //Numero de publicaciones por autor y año
+            let nombre = readline.question('Introduce el autor: ');
+            let anyoBus = readline.question('Introduce el año de inicio de la busqueda');
+            let busqueda = 0;
+            let encontrado = false;
+
+            for (let publicacion of publicaciones) {
+              if (nombre !== '' && anyo <= publication.getAnyoPub()) {
+                for (autor === nombre) {
+                  encontrado = true;
+                }
+              }
+            }
+            if (encontrado === true) busqueda++;
+        }
+        console.log('El numero de publicaciones realizadas por ' +nombre+ ' es: ' + busqueda);
+
+      }else if (opcion === 6) {
 
         }
-
-
        /**
         * let arrayArtCient = listaArtCient.filter( c=> c.titulo===titulo)
         * console.log(arrayArtCient[0]);
@@ -289,5 +316,3 @@ while(!atras){
     atras = true;
  }
 }
-
-
