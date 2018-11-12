@@ -12,22 +12,46 @@ test('Testing simplify II',()=>{
     expect(fr.getDenominator()).toBe(5);
 });
 
-//máximo común divisor de dos números es el mínimo posible
-test('Testing mcd maximo comun divisorde dos numeros III',()=>{
-    let Fraction = new Fraction(i.e,1);
-    expect(Fraction.mcd(4,3)).toBe(1);
+//mínimo común múltiplo es uno de los dos parámetros
+test('Testing simplify III',()=>{
+    let fr = new Fraction(2,4);
+    expect(fr.mcm()).toBe(2);
 });
 
-// el máximo común divisor de dos números es el 2
-test('Testing mcd máximo común divisor de dos números es el 2 IV',()=>{
-    let Fraction = new Fraction(1,2);
-    expect(Fraction.mcd(22,30)).toBe(2);
+//mínimo común múltiplo es la multiplicación de ambos números
+test('Testing simplify IV',()=>{
+    let fr = new Fraction(2,4);
+    expect(fr.mcm()).toBe(8);
 });
 
-//el máximo común divisor de dos números es uno de los dos parámetros de la función
-test('Testing mcd V',()=>{
-    let Fraction = new Fraction(3,9);
-    expect(Fraction.mcd(3,9)).toBe(3);
+//mínimo común múltiplo está entre el máximo de los dos parámetros y la multiplicación de ambos
+test('Testing simplify VI',()=>{
+    let fr = new Fraction(4,6);
+    expect(fr.mcm()).toBe(12);
 });
 
-//
+//el primer parámetro no es un entero
+test('Testing simplify VII',()=>{
+    let fr = new Fraction(1.5,2);
+    expect(fr.mcd(1.5,2)).toThrowError(Error);
+});
+
+//el segundo parámetro no es un entero
+test('Testing simplify VIII',()=>{
+    let fr = new Fraction(2,1.5);
+    expect(fr.mcd(2,1.5)).toThrowError(Error);
+});
+
+
+//el parámetro pasado como valor es un entero
+test('Testing simplify IX',()=>{
+    
+});   
+
+//parámetro proporcionado es otra fracción
+test('Testing simplify X',()=>{
+    let fr1 = new Fraction(2,4);
+    let fr2 = new Fraction(1,3);
+    let fr3 = fr1.add(fr2);
+        expect(fr3 .getDenominator).toBe(6);
+}); 
