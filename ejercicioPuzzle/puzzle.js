@@ -126,4 +126,21 @@ function pieceToOffset(numeroPiezas,anchura,altura,numeroPiezas){
 }
 
 
-function createReferenceSolucion()
+function createReferenceSolucion(alto,ancho,numeroPiezas){
+    let posicionTotal = [];
+    for(let i=0; i<numeroPiezas; i++){
+        posicionTotal.push(pieceToOffset(i,alto,ancho,numeroPiezas));
+    }
+    return posicionTotal;
+}
+
+
+function drawContentPuzzle(movimientos){
+    let posicionPieza = [];
+    for(let i=0; i<movimientos.length;i++){
+        posicionPieza.push([pieceNumberToRowsColumns(i,movimientos.length),[desplazamientos[i][0], desplazamientos[i][1]]]);
+    }
+    for(let i=0; i<posicionPieza.length; i++){
+        let 
+    }
+}
