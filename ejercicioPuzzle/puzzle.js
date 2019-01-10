@@ -1,14 +1,14 @@
 function getNumberPiecesFromUser() {
     let piezas = prompt("Introduce el numero de piezas que formaran el puzzle");
-    let raizCuadrada = Math.sqrt;
+    let numRaizCuadrada = Math.sqrt;
     let condition = true;
     while (condition) {
-        if (piezas % raizCuadrada === 0) {
+        if (piezas % numRaizCuadrada === 0) {
             alert("El numero introducido es valido");
             condition = false;
         } else {
             piezas = prompt("Elije un número con raiz cuadrada");
-            raizCuadrada = Math.sqrt(piezas);
+            numRaizCuadrada = Math.sqrt(piezas);
         }
     }
     return alert("Tu puzzle tiene " + piezas + " piezas");
@@ -74,5 +74,56 @@ console.log(shuffle(arrayObjetos));
 
 
 function pieceNumberToRowsColumns(numeroPieza,numeroTotalPiezas){
-    let raizCuadrada = Math.sqrt(numeroTotalPiezas);
+    let numRaizCuadrada = Math.sqrt(numeroTotalPiezas);
+    console.log(numRaizCuadrada);
+    let fila = parseInt(numeroPieza/numRaizCuadrada);
+    let columna = numeroPieza % numRaizCuadrada;
+
+    return (fila, columna);
 }
+
+console.log(pieceNumberToRowsColumns(1,5));
+
+
+function createPuzzleLayaot(numeroPiezas,anchura,altura,direccion){
+    let tabla = document.createElement("table");
+    let contador = 0;
+    let numRaizCuadrada = Math.sqrt(numeroPiezas);
+
+    for (let i = 0; i <= numRaizCuadrada -1; i++) {
+        let fila = document.createElement("tr");
+
+    for (let i = 0; i <= numRaizCuadrada -1; i++) {
+        let columna = document.createElement("td");
+        columna.id = "piece" + contador;
+        contador++;
+
+        columna.style.border="3px solid black";
+        columna.style.height="100px";
+        columna.style.width="100px";
+
+        columna.style.backgroundImage=direccion;
+        fila.appendChild(columna);
+
+    }
+    tabla.appendChild(fila);
+    }
+    document.body.appendChild(tabla);
+}
+
+createPuzzleLayaot(9,852,1277,'cat.jpg');
+
+
+function pieceToOffset(numeroPiezas,anchura,altura,numeroPiezas){
+    
+    let numRaizCuadrada = Math.sqrt(numeroPiezas);
+    let movimiento = [];
+    let posicionPieza = pieceNumberToRowsColumns(numeroPieza,numeroPiezas);
+
+    movimiento.push(parseInt((anchura/numRaizCuadrada)*posicionPieza[1])*-1,parseInt((altura/numRaizCuadrada)*posicionPieza[0]));
+    return movimiento;
+
+}
+
+
+function createReferenceSolucion()
