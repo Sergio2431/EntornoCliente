@@ -133,6 +133,7 @@ function pieceToOffset(numeroPiezas,anchura,altura,numeroPiezas){
 
 
 function createReferenceSolucion(alto,ancho,numeroPiezas){
+<<<<<<< HEAD
     let movimiento = [];
 
     for (let i=0; i<=numeroPiezas-1; i++) {
@@ -182,4 +183,22 @@ function gameLogic(imagen2, numeroPiezas) {
     document.getElementById('score').textContent += ' ' getMaxScore(numeroPiezas);
 
     
+=======
+    let posicionTotal = [];
+    for(let i=0; i<numeroPiezas; i++){
+        posicionTotal.push(pieceToOffset(i,alto,ancho,numeroPiezas));
+    }
+    return posicionTotal;
+}
+
+
+function drawContentPuzzle(movimientos){
+    let posicionPieza = [];
+    for(let i=0; i<movimientos.length;i++){
+        posicionPieza.push([pieceNumberToRowsColumns(i,movimientos.length),[desplazamientos[i][0], desplazamientos[i][1]]]);
+    }
+    for(let i=0; i<posicionPieza.length; i++){
+        let 
+    }
+>>>>>>> 9f9a4e8f9239c8a36a746fc14801566de6f3469b
 }
