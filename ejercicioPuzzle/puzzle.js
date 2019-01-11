@@ -2,12 +2,12 @@ function getNumberPiecesFromUser() {
     let piezas = prompt("Introduce el numero de piezas que formaran el puzzle");
     let numRaizCuadrada = Math.sqrt;
     let condition = true;
-    while (condition) {
+    while (!condition) {
         if (piezas % numRaizCuadrada === 0) {
             alert("El numero introducido es valido");
             condition = false;
         } else {
-            piezas = prompt("Elije un número con raiz cuadrada");
+            piezas = prompt("Elige un numero con raiz cuadrada");
             numRaizCuadrada = Math.sqrt(piezas);
         }
     }
@@ -88,7 +88,11 @@ console.log(pieceNumberToRowsColumns(1,5));
 function createPuzzleLayaot(numeroPiezas,anchura,altura,direccion){
     let tabla = document.createElement("table");
     let contador = 0;
+ 
+
     let numRaizCuadrada = Math.sqrt(numeroPiezas);
+    let alto = altura / numRaizCuadrada;
+    let ancho = anchura / numRaizCuadrada;
 
     for (let i = 0; i <= numRaizCuadrada -1; i++) {
         let fila = document.createElement("tr");
@@ -99,11 +103,12 @@ function createPuzzleLayaot(numeroPiezas,anchura,altura,direccion){
         contador++;
 
         columna.style.border="3px solid black";
-        columna.style.height="100px";
-        columna.style.width="100px";
+        columna.style.height=alto + "px";
+        columna.style.width=ancho + "px";
+        columna.style.backgroundImage="url(cat.jpg)"
 
         columna.style.backgroundImage=direccion;
-        fila.appendChild(columna);
+        tabla.appendChild(columna);
 
     }
     tabla.appendChild(fila);
@@ -111,7 +116,7 @@ function createPuzzleLayaot(numeroPiezas,anchura,altura,direccion){
     document.body.appendChild(tabla);
 }
 
-createPuzzleLayaot(9,852,1277,'cat.jpg');
+createPuzzleLayaot(9,958,1277,'cat.jpg');
 
 
 function pieceToOffset(numeroPiezas,anchura,altura,numeroPiezas){
@@ -121,9 +126,60 @@ function pieceToOffset(numeroPiezas,anchura,altura,numeroPiezas){
     let posicionPieza = pieceNumberToRowsColumns(numeroPieza,numeroPiezas);
 
     movimiento.push(parseInt((anchura/numRaizCuadrada)*posicionPieza[1])*-1,parseInt((altura/numRaizCuadrada)*posicionPieza[0]));
+    
     return movimiento;
 
 }
 
 
-function createReferenceSolucion()
+function createReferenceSolucion(alto,ancho,numeroPiezas){
+    let movimiento = [];
+
+    for (let i=0; i<=numeroPiezas-1; i++) {
+        movimiento.push(pieceToOffset(i, altura, anchura, numeroPiezas));
+    }
+
+    return movimiento;
+}
+
+console.log(createReferenceSolucion(958,1277,9));
+
+
+function drawContentPuzzle(movimiento) {
+    for (let i = 0; i < movimiento.length; i++) {
+        document.getElementById('piece'+i).style.backgroundPosition = movimiento[i][0]+'px ' +movimiento[i][1]+ 'px ';
+    }
+}
+
+drawContentPuzzle(shuffle(createReferenceSolution(958,1277,9)));
+
+
+function checklfSolution(solucion,actual) {
+    for (let i = 0; i < solucion.length; i++) {
+        if (solucion[1] !== actual[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+function initGame(imagen, numeroPiezas) {
+    let imag = new Image();
+    imag.addEventListener('load', function () {
+        gameLogic(img, numeroPiezas);
+    });
+    imag.src = imagen;
+}
+
+
+function gameLogic(imagen2, numeroPiezas) {
+    let sizes = getNewSizes(imagen2.width, imagen2.height);
+    let imagen3 = new Image();
+    let seleccion = undefined;
+
+    //indicar la puntuación del jugador
+    document.getElementById('score').textContent += ' ' getMaxScore(numeroPiezas);
+
+    
+}
