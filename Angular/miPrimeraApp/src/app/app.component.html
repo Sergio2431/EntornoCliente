@@ -1,0 +1,20 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<header>
+  <h1>Bienvenido a la tarjeta de presentación online!</h1>
+</header>
+<section>
+  <div class="input_area">
+    Name: <input [(ngModel)]="name" [readonly]="isDisabled" class="input_text"/>
+  </div>
+  <img class="avatar" src="https://api.adorable.io/avatars/285/abott@adorable">
+  <div class="input_area">
+    Trabajando: <input [(ngModel)]="position" [readonly]="isDisabled" class="input_text"/>
+  </div>
+</section>
+<footer>
+  <button (click)="saveEvent()" class= "save_button">{{buttonText}}</button>
+  <button (click)="showInformation()">Show Information</button>
+  <button (click)="resetInformation()">Reset Information</button>
+</footer>
+
+<router-outlet></router-outlet>
